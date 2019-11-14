@@ -1,4 +1,4 @@
-package tk.antowski.strello;
+package strello;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
