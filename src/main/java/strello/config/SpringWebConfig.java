@@ -1,5 +1,7 @@
 package strello.config;
 
+import java.util.Properties;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ComponentScan;
@@ -7,9 +9,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.velocity.VelocityConfigurer;
+import org.springframework.web.servlet.view.velocity.VelocityConfig;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 
 @EnableWebMvc
 @Configuration
@@ -21,16 +25,39 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
+	@Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
+
     @Bean
     public ViewResolver viewResolver() {
 
-        InternalResourceViewResolver bean = new InternalResourceViewResolver();
+        VelocityLayoutViewResolver resolver = new VelocityLayoutViewResolver();
 
-        bean.setViewClass(JstlView.class);
-        bean.setPrefix("/WEB-INF/view/");
-        bean.setSuffix(".jsp");
+        resolver.setPrefix("/WEB-INF/velocity/view/");
+        resolver.setLayoutUrl("/WEB-INF/velocity/layout.vm");
+        resolver.setSuffix(".vm");
+        resolver.setContentType("text/html; charset=UTF-8");
 
-        return bean;
+        return resolver;
 
     }
+
+    @Bean
+    public VelocityConfigurer velocityConfig() {
+
+		Properties config = new Properties();
+    	config.setProperty("input.encoding", "UTF-8");
+    	config.setProperty("output.encoding", "UTF-8");
+    	config.setProperty("default.contentType", "text/html;charset=UTF-8");
+
+        VelocityConfigurer vc = new VelocityConfigurer();
+        vc.setResourceLoaderPath("/");
+    	vc.setVelocityProperties(config);
+
+        return vc;
+
+    }
+
 }
