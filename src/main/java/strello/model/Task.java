@@ -10,6 +10,9 @@ public class Task {
     private String Assignee;
     private String Summary;
 
+    public Task(){
+    }
+
     public Task(long id, Date startDate, Date endDate, String assignee, String summary) {
         this.id = id;
         this.StartDate = startDate;
