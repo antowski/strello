@@ -6,19 +6,20 @@ import java.util.Date;
 public class Task {
 
     private long id;
-    private Date StartDate, EndDate;
-    private String Assignee;
-    private String Summary;
+    private Date startDate;
+    private Date endDate;
+    private String assignee;
+    private String summary;
 
     public Task(){
     }
 
     public Task(long id, Date startDate, Date endDate, String assignee, String summary) {
         this.id = id;
-        this.StartDate = startDate;
-        this.EndDate = endDate;
-        this.Assignee = assignee;
-        this.Summary = summary;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.assignee = assignee;
+        this.summary = summary;
     }
 
     public long getId() {
@@ -30,35 +31,35 @@ public class Task {
     }
 
     public Date getStartDate() {
-        return StartDate;
+        return startDate;
     }
 
     public void setStartDate(Date startDate) {
-        StartDate = startDate;
+        this.startDate = startDate;
     }
 
     public Date getEndDate() {
-        return EndDate;
+        return endDate;
     }
 
     public void setEndDate(Date endDate) {
-        EndDate = endDate;
+        this.endDate = endDate;
     }
 
     public String getAssignee() {
-        return Assignee;
+        return assignee;
     }
 
     public void setAssignee(String assignee) {
-        Assignee = assignee;
+        this.assignee = assignee;
     }
 
     public String getSummary() {
-        return Summary;
+        return summary;
     }
 
     public void setSummary(String summary) {
-        Summary = summary;
+        this.summary = summary;
     }
 
     @Override
@@ -75,10 +76,10 @@ public class Task {
                         "   , Summary=%s" +
                         "}"
                 , this.id
-                , formatter.format(this.StartDate)
-                , formatter.format(this.EndDate)
-                , this.Assignee
-                , this.Summary);
+                , formatter.format(this.startDate)
+                , formatter.format(this.endDate)
+                , this.assignee
+                , this.summary);
     }
 
 }
