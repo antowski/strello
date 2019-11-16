@@ -1,20 +1,21 @@
 package strello.model;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Task {
 
     private long id;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String assignee;
     private String summary;
 
     public Task(){
     }
 
-    public Task(long id, Date startDate, Date endDate, String assignee, String summary) {
+    public Task(long id, LocalDate startDate, LocalDate endDate, String assignee, String summary) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -30,19 +31,19 @@ public class Task {
         this.id = id;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -65,7 +66,7 @@ public class Task {
     @Override
     public String toString() {
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
         return String.format(
                 "Task{" +
