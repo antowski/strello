@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS tasks;
+
+CREATE TABLE tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    assignee VARCHAR(250) NOT NULL,
+    summary VARCHAR(250) DEFAULT NULL
+);
