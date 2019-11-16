@@ -1,6 +1,23 @@
 <div>
 	<p>filter</p>
+</div>
 <div>
-<div>
-	Table of tasks
-<div>
+    <table id="tasks" border="1">
+        <tr>
+            <th>Id</th>
+            <th>StartDate</th>
+            <th>EndDate</th>
+            <th>Assignee</th>
+            <th>Summary</th>
+        </tr>
+        #foreach($task in $tasks)
+        <tr>
+            <td>$task.id</td>
+            <td>$task.startDate</td>
+            <td>$task.endDate</td>
+            <td>$task.assignee</td>
+            <td>$task.summary</td>
+        </tr>
+        #end
+    </table>
+</div>
