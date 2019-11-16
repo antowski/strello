@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import strello.service.StrelloService;
 
-import java.util.Date;
-
 @Controller
 public class HomeController {
 
@@ -20,7 +18,7 @@ public class HomeController {
         this.strelloService = svc;
     }
 
-    @RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String home(ModelMap model) {
 
         model.addAttribute("tasks", strelloService.getAllTasks());

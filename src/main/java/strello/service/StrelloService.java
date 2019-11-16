@@ -17,9 +17,8 @@ public class StrelloService {
         this.taskDao = taskDao;
     }
 
-    public List<Task> getAllTasks(){
-        List<Task> tasks = taskDao.getTasks();
-        return tasks;
+    public List<Task> getAllTasks() {
+        return taskDao.getTasks();
     }
 
 }

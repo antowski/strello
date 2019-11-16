@@ -1,6 +1,5 @@
 package strello.model;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -12,7 +11,7 @@ public class Task {
     private String assignee;
     private String summary;
 
-    public Task(){
+    public Task() {
     }
 
     public Task(long id, LocalDate startDate, LocalDate endDate, String assignee, String summary) {

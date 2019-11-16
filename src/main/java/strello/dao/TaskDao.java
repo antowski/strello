@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface TaskDao {
 
-    public List<Task> getTasks();
+    List<Task> getTasks();
 
 }

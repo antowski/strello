@@ -12,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.velocity.VelocityConfigurer;
-import org.springframework.web.servlet.view.velocity.VelocityConfig;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 
 @EnableWebMvc
@@ -25,7 +24,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
-	@Override
+    @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
@@ -47,14 +46,14 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public VelocityConfigurer velocityConfig() {
 
-		Properties config = new Properties();
-    	config.setProperty("input.encoding", "UTF-8");
-    	config.setProperty("output.encoding", "UTF-8");
-    	config.setProperty("default.contentType", "text/html;charset=UTF-8");
+        Properties config = new Properties();
+        config.setProperty("input.encoding", "UTF-8");
+        config.setProperty("output.encoding", "UTF-8");
+        config.setProperty("default.contentType", "text/html;charset=UTF-8");
 
         VelocityConfigurer vc = new VelocityConfigurer();
         vc.setResourceLoaderPath("/");
-    	vc.setVelocityProperties(config);
+        vc.setVelocityProperties(config);
 
         return vc;
 
