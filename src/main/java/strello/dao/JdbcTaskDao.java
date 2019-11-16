@@ -21,7 +21,13 @@ public class JdbcTaskDao implements TaskDao {
 
     @Override
     public List<Task> getTasks() {
-        String SQL_SELECT_ALL_TASKS = "SELECT * FROM TASKS";
+        String SQL_SELECT_ALL_TASKS = "SELECT * FROM tasks";
         return jdbcTemplate.query(SQL_SELECT_ALL_TASKS, new JdbcTaskRowMapper());
+    }
+
+    @Override
+    public List<String> getUniqueAssignees() {
+        String SQL_SELECT_ALL_TASKS = "SELECT DISTINCT assignee FROM tasks order by assignee";
+        return jdbcTemplate.query(SQL_SELECT_ALL_TASKS, (rs, rowNum) -> rs.getString("assignee"));
     }
 }

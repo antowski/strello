@@ -101,6 +101,7 @@ public class HomeControllerTest {
                 "INSERT INTO tasks (start_date, end_date, assignee) VALUES " +
                         "('2000-01-01', '2000-01-01', 'Вася'), " +
                         "('2000-01-01', '2000-01-01', 'Петя'), " +
+                        "('2000-01-01', '2000-01-01', 'Аня'), " +
                         "('2000-01-01', '2000-01-01', 'Вася');";
 
         JdbcTemplate template = new JdbcTemplate(db);
@@ -118,9 +119,8 @@ public class HomeControllerTest {
 
         // assert
         assertNotNull("Homepage model should have 'assignees' property", model.get("assignees"));
-        List<String> assignees = Arrays.asList("Вася", "Петя");
-        assertSame(assignees, model.get("assignees"));
-        verify(dao).getTasks();
+        List<String> assignees = Arrays.asList("Аня", "Вася", "Петя");
+        assertEquals(assignees, model.get("assignees"));
 
     }
 

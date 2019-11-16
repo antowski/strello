@@ -22,6 +22,7 @@ public class HomeController {
     public String home(ModelMap model) {
 
         model.addAttribute("tasks", strelloService.getAllTasks());
+        model.addAttribute("assignees", strelloService.getUniqueAssignees());
 
         // DateTool for date formatting in velocity templates
         // See *.vm for $date.format(...)

@@ -8,4 +8,5 @@ public interface TaskDao {
 
     List<Task> getTasks();
 
+    List<String> getUniqueAssignees();
 }
