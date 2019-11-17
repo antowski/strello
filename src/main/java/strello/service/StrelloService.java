@@ -24,7 +24,7 @@ public class StrelloService {
     }
 
     public List<Task> getAllTasks() {
-        return taskDao.getTasks();
+        return taskDao.getAllTasks();
     }
 
     public List<Task> getFilteredTasks(String assignee) {

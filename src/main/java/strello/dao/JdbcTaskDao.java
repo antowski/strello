@@ -19,8 +19,8 @@ public class JdbcTaskDao implements TaskDao {
     }
 
     @Override
-    public List<Task> getTasks() {
-        String SQL_SELECT_STMT = "SELECT * FROM tasks";
+    public List<Task> getAllTasks() {
+        String SQL_SELECT_STMT = "SELECT * FROM tasks ORDER BY start_date";
         return jdbcTemplate.query(SQL_SELECT_STMT, new JdbcTaskRowMapper());
     }
 
