@@ -67,7 +67,7 @@ public class HomeControllerTest {
 
         // service mock svc returns prepared List<Tasks>
         StrelloService svc = mock(StrelloService.class);
-        when(svc.getAllTasks()).thenReturn(tasks);
+        when(svc.getFilteredTasks("")).thenReturn(tasks);
 
         HomeController controller = new HomeController();
         controller.setService(svc);
@@ -80,7 +80,7 @@ public class HomeControllerTest {
         assertEquals("home", viewName);
         assertNotNull("Homepage model should have 'tasks' property", model.get("tasks"));
         assertSame(tasks, model.get("tasks"));
-        verify(svc).getAllTasks();
+        verify(svc).getFilteredTasks("");
 
     }
 

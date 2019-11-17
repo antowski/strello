@@ -1,7 +1,5 @@
 package strello.mvc;
 
-import java.util.Optional;
-
 import org.apache.velocity.tools.generic.DateTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +22,9 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getTasksByFilter(ModelMap model
-            , @RequestParam(value="assignee", required=false) String assignee) {
+            , @RequestParam(value = "assignee", required = false) String assignee) {
 
-        model.addAttribute("tasks", strelloService.getAllTasks());
+        model.addAttribute("tasks", strelloService.getFilteredTasks(assignee));
         model.addAttribute("assignees", strelloService.getUniqueAssignees());
         model.addAttribute("filterAssignee", assignee);
 

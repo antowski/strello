@@ -2,11 +2,11 @@ package strello.dao;
 
 import java.util.LinkedHashMap;
 
-class TaskFilter {
+public class TaskFilter {
 
     private LinkedHashMap<TaskFilterField, Object> conditions = new LinkedHashMap<>();
 
-    void addCondition(TaskFilterField field, Object value) {
+    public void addCondition(TaskFilterField field, Object value) {
         conditions.put(field, value);
     }
 
@@ -14,7 +14,7 @@ class TaskFilter {
 
         StringBuilder whereClause = new StringBuilder(" WHERE TRUE");
 
-        conditions.forEach( (entry, value) -> {
+        conditions.forEach((entry, value) -> {
             whereClause
                     .append(" AND ")
                     .append(entry.getColumnName())
