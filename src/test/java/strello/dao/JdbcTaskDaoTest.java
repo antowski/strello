@@ -7,6 +7,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import strello.model.Task;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -43,6 +44,11 @@ public class JdbcTaskDaoTest {
     }
 
     @Test
+    public void testEmptyFilter() {
+        assertEquals(dao.getAllTasks(), dao.getFilteredTasks(new TaskFilter()));
+    }
+
+    @Test
     public void testFilterByAssignee() {
 
         // arrange
@@ -59,8 +65,40 @@ public class JdbcTaskDaoTest {
     }
 
     @Test
-    public void testEmptyFilter() {
-       assertEquals(dao.getAllTasks(), dao.getFilteredTasks(new TaskFilter()));
+    public void testFilterByDates() {
+
+        // arrange
+        TaskFilter filter = new TaskFilter();
+        filter.addCondition(TaskFilterField.START_DATE, LocalDate.of(2000 , 1, 1));
+        filter.addCondition(TaskFilterField.END_DATE, LocalDate.of(2006 , 1, 1));
+
+        // act
+        List<Task> tasks = dao.getFilteredTasks(filter);
+
+        // assert
+        assertEquals(2, tasks.size());
+        assertEquals(LocalDate.of(2000 , 1, 1), tasks.get(0).getStartDate());
+        assertEquals(LocalDate.of(2002 , 1, 1), tasks.get(1).getStartDate());
+
+    }
+
+    @Test
+    public void testComplexFilter() {
+
+        // arrange
+        TaskFilter filter = new TaskFilter();
+        filter.addCondition(TaskFilterField.ASSIGNEE, "Вася");
+        filter.addCondition(TaskFilterField.START_DATE, LocalDate.of(2001 , 6, 1));
+        filter.addCondition(TaskFilterField.END_DATE, LocalDate.of(2010 , 6, 1));
+
+        // act
+        List<Task> tasks = dao.getFilteredTasks(filter);
+
+        // assert
+        assertEquals(1, tasks.size());
+        assertEquals("Вася", tasks.get(0).getAssignee());
+        assertEquals(LocalDate.of(2002 , 1, 1), tasks.get(0).getStartDate());
+
     }
 
 }

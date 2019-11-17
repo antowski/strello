@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class StrelloService {
 
-    private TaskDao taskDao;
+    private final TaskDao taskDao;
 
     @Autowired
     public StrelloService(TaskDao taskDao) {

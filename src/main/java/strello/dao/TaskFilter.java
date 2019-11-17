@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 
 public class TaskFilter {
 
-    private LinkedHashMap<TaskFilterField, Object> conditions = new LinkedHashMap<>();
+    private final LinkedHashMap<TaskFilterField, Object> conditions = new LinkedHashMap<>();
 
     public void addCondition(TaskFilterField field, Object value) {
         conditions.put(field, value);
@@ -14,12 +14,11 @@ public class TaskFilter {
 
         StringBuilder whereClause = new StringBuilder(" WHERE TRUE");
 
-        conditions.forEach((entry, value) -> {
-            whereClause
-                    .append(" AND ")
-                    .append(entry.getColumnName())
-                    .append(" = ?");
-        });
+        conditions.forEach((entry, value) -> whereClause
+                .append(" AND ")
+                .append(entry.getColumnName())
+                .append(entry.getTypeOfComparison())
+                .append("?"));
 
         return whereClause.toString();
 
