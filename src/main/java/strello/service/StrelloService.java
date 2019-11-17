@@ -21,6 +21,10 @@ public class StrelloService {
         return taskDao.getTasks();
     }
 
+    public List<Task> getFilteredTasks() {
+        return taskDao.getTasks();
+    }
+
     public List<String> getUniqueAssignees() {
         return taskDao.getUniqueAssignees();
     }

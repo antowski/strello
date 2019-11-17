@@ -9,4 +9,7 @@ public interface TaskDao {
     List<Task> getTasks();
 
     List<String> getUniqueAssignees();
+
+    List<Task> getFilteredTasks(TaskFilter filter);
+    
 }
