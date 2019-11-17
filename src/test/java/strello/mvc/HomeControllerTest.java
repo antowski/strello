@@ -46,7 +46,6 @@ public class HomeControllerTest {
 
     @Before
     public void setup() {
-        //this.mockMvc = MockMvcBuilders.standaloneSetup(new HomeController()).build();
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 
