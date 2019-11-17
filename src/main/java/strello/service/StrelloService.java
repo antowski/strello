@@ -7,6 +7,7 @@ import strello.dao.TaskFilter;
 import strello.dao.TaskFilterField;
 import strello.model.Task;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -23,11 +24,11 @@ public class StrelloService {
         return !(assignee == null || assignee.isEmpty() || assignee.equals("all"));
     }
 
-    public List<Task> getAllTasks() {
-        return taskDao.getAllTasks();
+    private boolean isDateSelected(LocalDate date) {
+        return !(date == null);
     }
 
-    public List<Task> getFilteredTasks(String assignee) {
+    private TaskFilter buildFilter(String assignee, LocalDate startDate, LocalDate endDate) {
 
         TaskFilter filter = new TaskFilter();
 
@@ -35,7 +36,24 @@ public class StrelloService {
             filter.addCondition(TaskFilterField.ASSIGNEE, assignee);
         }
 
-        return taskDao.getFilteredTasks(filter);
+        if (isDateSelected(startDate)) {
+            filter.addCondition(TaskFilterField.START_DATE, startDate);
+        }
+
+        if (isDateSelected(endDate)) {
+            filter.addCondition(TaskFilterField.END_DATE, endDate);
+        }
+
+        return filter;
+
+    }
+
+    public List<Task> getAllTasks() {
+        return taskDao.getAllTasks();
+    }
+
+    public List<Task> getFilteredTasks(String assignee, LocalDate startDate, LocalDate endDate) {
+        return taskDao.getFilteredTasks(buildFilter(assignee, startDate, endDate));
     }
 
     public List<String> getUniqueAssignees() {

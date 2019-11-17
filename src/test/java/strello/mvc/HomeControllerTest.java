@@ -59,7 +59,7 @@ public class HomeControllerTest {
     }
 
     @Test
-    public void testModelWithTasksReturned() throws Exception {
+    public void testModelWithTasksReturned() {
 
         // arrange
 
@@ -67,25 +67,25 @@ public class HomeControllerTest {
 
         // service mock svc returns prepared List<Tasks>
         StrelloService svc = mock(StrelloService.class);
-        when(svc.getFilteredTasks("")).thenReturn(tasks);
+        when(svc.getFilteredTasks("", null, null)).thenReturn(tasks);
 
         HomeController controller = new HomeController();
         controller.setService(svc);
 
         // act
         ModelMap model = new ModelMap();
-        String viewName = controller.getTasksByFilter(model, "");
+        String viewName = controller.getTasksByFilter(model, "", null, null);
 
         // assert
         assertEquals("home", viewName);
         assertNotNull("Homepage model should have 'tasks' property", model.get("tasks"));
         assertSame(tasks, model.get("tasks"));
-        verify(svc).getFilteredTasks("");
+        verify(svc).getFilteredTasks("", null, null);
 
     }
 
     @Test
-    public void testModelWithAssigneesReturned() throws Exception {
+    public void testModelWithAssigneesReturned() {
 
         // arrange
         DataSource db = new EmbeddedDatabaseBuilder()
@@ -114,7 +114,7 @@ public class HomeControllerTest {
 
         // act
         ModelMap model = new ModelMap();
-        String viewName = controller.getTasksByFilter(model, "");
+        String viewName = controller.getTasksByFilter(model, "", null, null);
 
         // assert
         assertNotNull("Homepage model should have 'assignees' property", model.get("assignees"));
