@@ -75,7 +75,7 @@ public class HomeControllerTest {
 
         // act
         ModelMap model = new ModelMap();
-        String viewName = controller.home(model);
+        String viewName = controller.getTasksByFilter(model, "");
 
         // assert
         assertEquals("home", viewName);
@@ -115,7 +115,7 @@ public class HomeControllerTest {
 
         // act
         ModelMap model = new ModelMap();
-        String viewName = controller.home(model);
+        String viewName = controller.getTasksByFilter(model, "");
 
         // assert
         assertNotNull("Homepage model should have 'assignees' property", model.get("assignees"));
