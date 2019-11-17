@@ -5,16 +5,21 @@ package strello.dao;
  */
 public enum TaskFilterField {
 
-    ASSIGNEE("assignee");
+    ASSIGNEE("assignee", java.sql.Types.VARCHAR);
 
     private final String columnName;
+    private final int sqlType;
 
-    TaskFilterField(String columnName) {
+    TaskFilterField(String columnName, int sqlType) {
         this.columnName = columnName;
+        this.sqlType = (int) sqlType;
     }
 
     public String getColumnName() {
         return columnName;
     }
 
+    public int getSqlType() {
+        return sqlType;
+    }
 }

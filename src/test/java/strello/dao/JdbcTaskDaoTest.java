@@ -7,10 +7,9 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import strello.model.Task;
 
 import javax.sql.DataSource;
-
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.H2;
 
 public class JdbcTaskDaoTest {
@@ -18,7 +17,7 @@ public class JdbcTaskDaoTest {
     private JdbcTaskDao dao;
 
     @Before
-    public void setup(){
+    public void setup() {
 
         // arrange
         DataSource db = new EmbeddedDatabaseBuilder()

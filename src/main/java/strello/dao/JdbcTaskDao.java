@@ -1,16 +1,12 @@
 package strello.dao;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import strello.model.Task;
 
-import java.time.LocalDate;
+import javax.sql.DataSource;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Repository
 public class JdbcTaskDao implements TaskDao {
@@ -36,14 +32,15 @@ public class JdbcTaskDao implements TaskDao {
 
     @Override
     public List<Task> getFilteredTasks(TaskFilter filter) {
-        List<Task> tasks = Stream
-                .of(new Task(
-                        1,
-                        LocalDate.of(2015 , 6, 1),
-                        LocalDate.of(2015, 6, 1), "" +
-                        "Петя", "" +
-                        ""))
-                .collect(Collectors.toList());
-        return tasks;
+
+        String SQL_SELECT_STMT = "SELECT * FROM tasks" + filter.getWhereClause() + " ORDER BY start_date";
+
+
+        return jdbcTemplate.query(
+                SQL_SELECT_STMT,
+                filter.getQueryArgs(),
+                filter.getQueryArgTypes(),
+                new JdbcTaskRowMapper());
+
     }
 }
