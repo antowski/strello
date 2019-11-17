@@ -38,7 +38,7 @@ public class JdbcTaskDaoTest {
         JdbcTemplate template = new JdbcTemplate(db);
         template.execute(SQL_INSERT_STMT);
 
-        JdbcTaskDao dao = new JdbcTaskDao();
+        this.dao = new JdbcTaskDao();
         dao.setDataSource(db);
 
     }
