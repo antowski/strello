@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface TaskDao {
 
-    List<Task> getTasks();
+    List<Task> getAllTasks();
 
+    List<String> getUniqueAssignees();
+
+    List<Task> getFilteredTasks(TaskFilter filter);
+    
 }

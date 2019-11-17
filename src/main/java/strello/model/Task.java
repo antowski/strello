@@ -62,6 +62,24 @@ public class Task {
         this.summary = summary;
     }
 
+    /*
+     * important for tests
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        return (this.id == ((Task) obj).id);
+    }
+
+    /*
+     * important for tests
+     */
+    @Override
+    public int hashCode() {
+        return java.lang.Math.toIntExact(this.id);
+    }
+
     @Override
     public String toString() {
 
