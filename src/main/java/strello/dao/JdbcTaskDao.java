@@ -20,21 +20,20 @@ public class JdbcTaskDao implements TaskDao {
 
     @Override
     public List<Task> getTasks() {
-        String SQL_SELECT_ALL_TASKS = "SELECT * FROM tasks";
-        return jdbcTemplate.query(SQL_SELECT_ALL_TASKS, new JdbcTaskRowMapper());
+        String SQL_SELECT_STMT = "SELECT * FROM tasks";
+        return jdbcTemplate.query(SQL_SELECT_STMT, new JdbcTaskRowMapper());
     }
 
     @Override
     public List<String> getUniqueAssignees() {
-        String SQL_SELECT_ALL_TASKS = "SELECT DISTINCT assignee FROM tasks order by assignee";
-        return jdbcTemplate.query(SQL_SELECT_ALL_TASKS, (rs, rowNum) -> rs.getString("assignee"));
+        String SQL_SELECT_STMT = "SELECT DISTINCT assignee FROM tasks order by assignee";
+        return jdbcTemplate.query(SQL_SELECT_STMT, (rs, rowNum) -> rs.getString("assignee"));
     }
 
     @Override
     public List<Task> getFilteredTasks(TaskFilter filter) {
 
         String SQL_SELECT_STMT = "SELECT * FROM tasks" + filter.getWhereClause() + " ORDER BY start_date";
-
 
         return jdbcTemplate.query(
                 SQL_SELECT_STMT,

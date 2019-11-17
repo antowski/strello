@@ -1,7 +1,6 @@
 package strello.dao;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 class TaskFilter {
 
@@ -15,10 +14,10 @@ class TaskFilter {
 
         StringBuilder whereClause = new StringBuilder(" WHERE TRUE");
 
-        conditions.entrySet().forEach(entry -> {
+        conditions.forEach( (entry, value) -> {
             whereClause
                     .append(" AND ")
-                    .append(entry.getKey().getColumnName())
+                    .append(entry.getColumnName())
                     .append(" = ?");
         });
 
