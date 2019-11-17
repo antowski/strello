@@ -1,5 +1,16 @@
 <div>
-	<p>filter</p>
+	<form id="filter" action="/filter/" method="post">
+        <label for="assignee">Assignee</label>
+        <select id="assignee">
+            <option value="all" selected> -= All assignees =- </option>
+            #foreach($assignee in $assignees)
+            <option value="$assignee">$assignee</option>
+            #end
+        </select>
+        <div class="form-actions">
+            <input type="submit" value="find" />
+        </div>
+    </form>
 </div>
 <div>
     <table id="tasks" border="1">
