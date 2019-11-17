@@ -58,4 +58,9 @@ public class JdbcTaskDaoTest {
 
     }
 
+    @Test
+    public void testEmptyFilter() {
+       assertEquals(dao.getAllTasks(), dao.getFilteredTasks(new TaskFilter()));
+    }
+
 }
