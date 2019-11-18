@@ -1,14 +1,29 @@
 <div>
 	<form id="filter" accept-charset="UTF-8" action="/home/" method="get">
 
+        <!-- period -->
+        <label for="period">Period:</label>
+        <select id="period">
+            <option value="last-q">Last Quarter</option>
+            <option value="last-m">Last Month</option>
+            <option value="last-w">Last Week</option>
+            <option value="cur-q">Current Quarter to Date</option>
+            <option value="cur-m">Current Month to Date</option>
+            <option value="cur-w">Current Week to Date</option>
+        </select>
+        <br>
+
+        <!-- start date -->
         <label for="startDate">Start date:</label>
         <input type="date" id="startDate" name="startDate" value="$filterStartDate">
-            <br>
+        <br>
 
+        <!-- end date -->
         <label for="startDate">End date:</label>
         <input type="date" id="endDate" name="endDate" value="$filterEndDate">
-            <br>
+        <br>
 
+        <!-- assignee -->
         <label for="assignee">Assignee:</label>
         <select id="assignee" name="assignee">
             <option value="all" #if( $filterAssignee == "all" || $filterAssignee == "" ) selected #end > -= All assignees =- </option>

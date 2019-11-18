@@ -4,7 +4,17 @@
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>STrello - simple task manager</title>  
+
+		<!-- jquery -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+		<!-- luxon - Javascript dates and times helpers -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/luxon@1.21.1/build/global/luxon.min.js"></script>
+
+		<script type="text/javascript" src="/resources/js/home.js"></script>
+
+		<title>STrello - simple task manager</title>
+
 	</head>
 
 	<body>
