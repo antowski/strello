@@ -77,7 +77,6 @@ public class HomeControllerTest {
         String viewName = controller.getTasksByFilter(model, "", null, null);
 
         // assert
-        assertEquals("home", viewName);
         assertNotNull("Homepage model should have 'tasks' property", model.get("tasks"));
         assertSame(tasks, model.get("tasks"));
         verify(svc).getFilteredTasks("", null, null);
