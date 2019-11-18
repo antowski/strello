@@ -21,6 +21,22 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+.classpath
+.project
+
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
