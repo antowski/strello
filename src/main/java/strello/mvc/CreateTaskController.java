@@ -1,11 +1,9 @@
 package strello.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +37,8 @@ public class CreateTaskController {
         if(bindingResult.hasErrors()) {
             return "taskEdit";
         }
+
+        strelloService.saveTask(task);
 
         return "redirect:/home";
 

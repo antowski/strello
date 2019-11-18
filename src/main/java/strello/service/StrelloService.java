@@ -60,4 +60,7 @@ public class StrelloService {
         return taskDao.getUniqueAssignees();
     }
 
+    public void saveTask(Task task) {
+        taskDao.addTask(task);
+    }
 }

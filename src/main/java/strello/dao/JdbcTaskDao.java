@@ -42,4 +42,10 @@ public class JdbcTaskDao implements TaskDao {
                 new JdbcTaskRowMapper());
 
     }
+
+    @Override
+    public void addTask(Task task) {
+        String SQL_INSERT_STMT = "INSERT INTO tasks (start_date, end_date, assignee, summary) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(SQL_INSERT_STMT, task.getStartDate(), task.getEndDate(), task.getAssignee(), task.getSummary());
+    }
 }
