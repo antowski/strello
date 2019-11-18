@@ -1,36 +1,43 @@
-<div>
+<div class="form-container">
 	<form id="filter" accept-charset="UTF-8" action="/home" method="get">
 
+        <h2>Filter</h2>
+
         <!-- period -->
-        <label for="period">Period:</label>
-        <select id="period">
-            <option value="last-q">Last Quarter</option>
-            <option value="last-m">Last Month</option>
-            <option value="last-w">Last Week</option>
-            <option value="cur-q">Current Quarter to Date</option>
-            <option value="cur-m">Current Month to Date</option>
-            <option value="cur-w">Current Week to Date</option>
-        </select>
-        <br>
+        <p>
+            <label for="period">Period:</label>
+            <select id="period">
+                <option value="last-q">Last Quarter</option>
+                <option value="last-m">Last Month</option>
+                <option value="last-w">Last Week</option>
+                <option value="cur-q">Current Quarter to Date</option>
+                <option value="cur-m">Current Month to Date</option>
+                <option value="cur-w">Current Week to Date</option>
+            </select>
+        </p>
 
         <!-- start date -->
-        <label for="startDate">Start date:</label>
-        <input type="date" id="startDate" name="startDate" value="$filterStartDate">
-        <br>
+        <p>
+            <label for="startDate">Start date:</label>
+            <input type="date" id="startDate" name="startDate" value="$filterStartDate">
+        </p>
 
         <!-- end date -->
-        <label for="startDate">End date:</label>
-        <input type="date" id="endDate" name="endDate" value="$filterEndDate">
-        <br>
+        <p>
+            <label for="startDate">End date:</label>
+            <input type="date" id="endDate" name="endDate" value="$filterEndDate">
+        </p>
 
         <!-- assignee -->
-        <label for="assignee">Assignee:</label>
-        <select id="assignee" name="assignee">
-            <option value="all" #if( $filterAssignee == "all" || $filterAssignee == "" ) selected #end > -= All assignees =- </option>
-            #foreach($assignee in $assignees)
-            <option value="$assignee" #if( $assignee == $filterAssignee ) selected #end >$assignee</option>
-            #end
-        </select>
+        <p>
+            <label for="assignee">Assignee:</label>
+            <select id="assignee" name="assignee">
+                <option value="all" #if( $filterAssignee == "all" || $filterAssignee == "" ) selected #end > -= All assignees =- </option>
+                #foreach($assignee in $assignees)
+                <option value="$assignee" #if( $assignee == $filterAssignee ) selected #end >$assignee</option>
+                #end
+            </select>
+        </p>
 
         <div class="form-actions">
             <input type="submit" id="filter" value="find" />
@@ -38,24 +45,25 @@
 
     </form>
 
-    <br>
-
-    <form id="newTask" accept-charset="UTF-8" action="/newTask" method="get">
-        <div class="form-actions">
-            <input type="submit" id="newTask" value="new task" />
-        </div>
-    </form>
-
 </div>
+
+<form id="newTask" accept-charset="UTF-8" action="/newTask" method="get"></form>
+<h2>Tasks</h2>
+<div class="toolbar">
+    <input type="submit" id="newTask" form="newTask" value="new task" />
+</div>
+
 <div>
     <table id="tasks" border="1">
-        <tr>
-            <th>Id</th>
-            <th>StartDate</th>
-            <th>EndDate</th>
-            <th>Assignee</th>
-            <th>Summary</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>StartDate</th>
+                <th>EndDate</th>
+                <th>Assignee</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
         #foreach($task in $tasks)
         <tr>
             <td>$task.id</td>

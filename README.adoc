@@ -1,4 +1,94 @@
-Простое веб-приложение для управления задачами
-==============================================
+= STrello - веб-приложение для управления задачами =
+:source-highlighter: rouge
+:doctype: book
+:toc:
+:toc-title:
 
+STrello - простое веб-приложение для управления списком задач.
 
+.Функциональные возможности:
+* просмотр полного списка задач;
+* отбор задач по дате и/или исполнителю;
+* добавление задачи в список;
+
+**Демо-версия** развернута по адресу: http://167.172.170.10:8080/
+
+== Сборка
+
+Для сборки используется https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.6.2/[maven 3.6.2], запускаемый через обертку https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.5/[maven-wrapper 0.5.5]. Maven-wrapper при запуске скачивает maven указанной версии и необходимые зависимости, описанные в файле pom.xml.
+
+.Сборка в Windows
+[source,cmd]
+----
+mvnw.cmd clean package 
+----
+
+.Сборка в Linux/BSD
+[source,sh]
+----
+./mvnw clean package 
+----
+
+Результат сборки - WAR-файл.
+
+== Локальный запуск
+
+Для локального запуска выполните:
+
+[source,sh]
+----
+./mvnw tomcat7:run-war
+----
+
+Будет выполнена сборка проекта, запуск встроенного контейнера tomcat7 (предоставляется плагином https://tomcat.apache.org/maven-plugin-trunk/index.html[Apache Tomcat Maven Plugin]) и разворачивание собранного WAR на этом локальном сервере. Развернутое приложение будет доступно по адресу http://localhost:8090/. 
+
+== Зависимости
+
+Зависимости будут скачаны автоматически из репозитория **maven central** в процессе сборки.
+
+[options="header",cols="10,^3,20"]
+|=======================
+| Пакет                                      | Версия        | Комментарий
+| org.springframework.spring-webmvc          | 4.2.9.RELEASE | Spring MVC-фреймворк
+| org.springframework.spring-context-support | 4.2.9.RELEASE | Поддержка Velocity со стороны Spring
+| org.springframework.spring-jdbc            | 4.2.9.RELEASE | Часть Spring. Доступ к данным через jdbc
+| javax.servlet.javax.servlet-api            | 3.1.0         | Servlet API
+| org.apache.velocity.velocity               | 1.7           | Velocity - шаблонизатор для формирования веб-страниц
+| org.apache.velocity.velocity-tools         | 2.0           | Вспомогательные инструменты Velocity
+| com.h2database.h2                          | 1.4.200       | СУБД. Используется как in-memory DB для демонстрации доступа к базе данных по jdbc
+| javax.validation.validation-api            | 2.0.1.Final   | API для проверки данных на соответствие правилам
+| org.hibernate.hibernate-validator          | 5.2.4.Final   | см. предыдущий пункт. Подключена ради аннотации @NotBlank для проверки строк
+| org.springframework.spring-test            | 4.2.9.RELEASE | Подсистема тестирования, часть Spring
+| junit.junit                                | 4.12          | Фреймворк для модульного тестирования
+| org.mockito.mockito-core                   | 3.1.0         | Тестирование. Удобное создание mock-объектов, удобная проверка утверждений
+|=======================
+
+== Архитектура приложения
+
+.Хранение данных
+Для хранения данных приложения использана СУБД https://www.h2database.com/[H2]. База данных хранится в оперативной памяти и существует только во время работы приложения. На диск данные не записываются. При каждом запуске создается новый экземпляр базы данных с уникальным именем и заполняется предопределенными данными (см. класс https://github.com/antowski/strello/blob/efbfeea11e7e7d215fa7712e45cbb86b1d501325/src/main/java/strello/config/DataSourceConfig.java#L15[strello.config.DataSourceConfig]). 
+
+.Серверная часть разделена на следующие слои:
+1. Модель данных - класс https://github.com/antowski/strello/blob/efbfeea11e7e7d215fa7712e45cbb86b1d501325/src/main/java/strello/model/Task.java#L8[strello.model.Task] 
+2. Слой доступа к данным. Классы доступа к данным собраны в пакете **strello.dao**. 
+3. Бизнес-логика. Класс **strello.service.StrelloService**.
+4. Обработка запросов. Для обработки запросов служат два контроллера из пакета **strello.mvc**. Один отвечает за обработку запросов на отображение списка задач, другой - запрос на добавление задачи. 
+
+Конфигурация Spring выполняется через аннотации в Java-классах вместо использования xml-файлов. Классы конфигурации собраны в пакете **scrello.config**.
+
+Для формирования представлений (view) использован шаблонизатор http://velocity.apache.org/[Apache Velocity 1.7]. Отображаемая пользователю страница собирается из шаблонов, размещенных в каталоге main/webapp/WEB-INF/velocity/.
+
+.Шаблоны:
+    * layout.vm - общий шаблон страницы;
+    * parts\header.vm - заголовок страницы;
+    * parts\footer.vm - "подвал" страницы;
+    * view\home.vm - домашняя страница: таблица задач и фильтр;
+    * view\taskEdit.vm - добавление новой задачи;
+
+Код клиентской части приложения отделен от представления и вынесен в файл home.js. В клиентской части приложения используются две подключаемые библиотеки.
+
+.Библиотеки JavaScript
+    * https://jquery.com/[jQuery] - для удобного доступа к DOM и обработки событий элементов управления;
+    * https://moment.github.io/luxon/[Luxon] - для работы с датой и временем.
+
+Внешнее оформление страницы описывается в файле main.css, который подключается в главном шаблоне layout.vm.
