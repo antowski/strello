@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.velocity.VelocityConfigurer;
 import org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver;
 
+import javax.validation.Validator;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
@@ -34,8 +36,20 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
                     @Override
                     public LocalDate convert(String source) {
-                        return (source == null || source.isEmpty()) ? null : LocalDate.parse(
-                                source, DateTimeFormatter.ISO_LOCAL_DATE);
+
+                        LocalDate dt;
+
+                        if (source == null || source.isEmpty()){
+                            dt = null;
+                        } else {
+                            try {
+                                dt = LocalDate.parse(source, DateTimeFormatter.ISO_LOCAL_DATE);
+                            } catch (Exception e) {
+                                dt = null;
+                            }
+                        }
+
+                        return dt;
                     }
                 }
 
@@ -51,6 +65,11 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
+    }
+
+    @Bean
+    public Validator validator() {
+        return new LocalValidatorFactoryBean();
     }
 
     @Bean

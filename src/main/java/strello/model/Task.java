@@ -1,13 +1,21 @@
 package strello.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
 
     private long id;
+
+    @NotNull(message="incorrect date format, use YYYY-MM-DD pattern")
     private LocalDate startDate;
+
+    @NotNull(message="incorrect date format, use YYYY-MM-DD pattern")
     private LocalDate endDate;
+
+    @NotBlank
     private String assignee;
     private String summary;
 

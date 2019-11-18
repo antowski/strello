@@ -1,5 +1,5 @@
 <div>
-	<form id="filter" accept-charset="UTF-8" action="/home/" method="get">
+	<form id="filter" accept-charset="UTF-8" action="/home" method="get">
 
         <!-- period -->
         <label for="period">Period:</label>
@@ -37,6 +37,15 @@
         </div>
 
     </form>
+
+    <br>
+
+    <form id="newTask" accept-charset="UTF-8" action="/newTask" method="get">
+        <div class="form-actions">
+            <input type="submit" id="newTask" value="new task" />
+        </div>
+    </form>
+
 </div>
 <div>
     <table id="tasks" border="1">

@@ -11,5 +11,6 @@ public interface TaskDao {
     List<String> getUniqueAssignees();
 
     List<Task> getFilteredTasks(TaskFilter filter);
-    
+
+    void addTask(Task task);
 }
