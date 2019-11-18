@@ -10,8 +10,8 @@
 
 		<!-- luxon - Javascript dates and times helpers -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/luxon@1.21.1/build/global/luxon.min.js"></script>
-
 		<script type="text/javascript" src="/resources/js/home.js"></script>
+		<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
 
 		<title>STrello - simple task manager</title>
 
@@ -20,15 +20,19 @@
 	<body>
 	
 		<div class="header">
-			#parse("/WEB-INF/velocity/parts/header.vm")
+			<div class="container">
+				#parse("/WEB-INF/velocity/parts/header.vm")
+			</div>
 		</div>
 	
-	  	<div class="content">
+	  	<div class="container">
 	    	$screen_content
 	  	</div>
 	  
 	  	<div class="footer">
-	    	#parse("/WEB-INF/velocity/parts/footer.vm")
+			<div class="container">
+	    		#parse("/WEB-INF/velocity/parts/footer.vm")
+			</div>
 	  	</div>
 	
 	</body>
