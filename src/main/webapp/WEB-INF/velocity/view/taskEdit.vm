@@ -1,0 +1,37 @@
+<div>
+    <form id="task" accept-charset="UTF-8" action="/newTask" method="POST">
+
+        <h2>New Task</h2>
+
+        <!-- start date -->
+        <label for="startDate">Start date:</label>
+        #springBind("task.startDate")
+        <input type="date" id="#springXmlId(${status.expression})" name="${status.expression}" value="$!status.value" ${attributes}#springCloseTag()
+        #springShowErrors("<br>" "class='error'")<br>
+
+        <!-- end date -->
+        <label for="endDate">End date:</label>
+        #springBind("task.endDate")
+        <input type="date" id="#springXmlId(${status.expression})" name="${status.expression}" value="$!status.value" ${attributes}#springCloseTag()
+        #springShowErrors("<br>" "class='error'")<br>
+
+        <!-- assignee -->
+        <label for="assignee">Assignee:</label>
+        #springFormInput("task.assignee")
+        #springShowErrors("<br>" "class='error'")<br>
+
+        <!-- summary -->
+        <label for="summary">Summary:</label>
+        #springFormTextarea("task.summary" "class='summary'")
+        #springShowErrors("<br>" "class='error'")<br>
+
+    </form>
+
+    <form id="cancel-form" action="/home" method="GET"></form>
+
+    <div class="form-actions">
+        <input type="submit" form="task" class="ok" value="Create" />
+        <input type="submit" form="cancel-form" class="cancel" value="Cancel" />
+    </div>
+
+</div>

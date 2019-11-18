@@ -1,12 +1,18 @@
 package strello.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import strello.model.Task;
 import strello.service.StrelloService;
+
+import javax.validation.Valid;
 
 @SuppressWarnings("WeakerAccess")
 @Controller
@@ -23,7 +29,19 @@ public class CreateTaskController {
     @SuppressWarnings("SameReturnValue")
     @RequestMapping(method = RequestMethod.GET)
     public String createNewTask(Model model) {
-        return "new";
+        model.addAttribute("task", new Task());
+        return "taskEdit";
+    }
+
+    @RequestMapping(method=RequestMethod.POST)
+    public String saveTaskFromForm(@Valid @ModelAttribute("task") Task task, BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+            return "taskEdit";
+        }
+
+        return "redirect:/home";
+
     }
 
 }

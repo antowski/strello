@@ -3,7 +3,6 @@ package strello.mvc;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -37,6 +36,6 @@ public class CreateTaskControllerTest {
 
         mockMvc.perform(get("/newTask"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("new"));
+                .andExpect(view().name("taskEdit"));
     }
 }

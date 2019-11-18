@@ -22,6 +22,8 @@
         <velocity.version>1.7</velocity.version>
         <velocity-tools.version>2.0</velocity-tools.version>
         <h2database.version>1.4.200</h2database.version>
+        <validation-api.version>2.0.1.Final</validation-api.version>
+        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
         <junit.version>4.12</junit.version>
         <mockito.version>3.1.0</mockito.version>
 
@@ -85,6 +87,20 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
             <version>${h2database.version}</version>
+        </dependency>
+
+        <!-- validation API -->
+        <!-- see "JSR 303: Bean Validation" spec: https://jcp.org/en/jsr/detail?id=303 -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${validation-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
         </dependency>
 
         <!-- testing -->
